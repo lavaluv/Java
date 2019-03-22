@@ -76,6 +76,7 @@ class Father{
 }
 class Son extends Father{
 	public int pubData;
+	public Son() {};
 	public Son(int j,int n) {
 		//super(0, j, n);显示调用父类构造器
 		System.out.println("Son Constructor");
