@@ -9,12 +9,40 @@ public class Stack<T>{
 	public Node<T> getTop() {
 		return this.top;
 	}
-	public boolean isEmpty(Stack<T> stack) {
-		return stack.getTop().nextNode() == null ? true:false;
+	public boolean isEmpty() {
+		return this.top.nextNode() == null ? true:false;
+	}
+	public boolean pushStack(T input) {
+		if (this.top.insertNode(this.top, 0, input)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public T pullStack() {
+		Node<T> node = this.top;
+		try {
+			T t = node.nextNode().getData(); 
+			node.deleteNode(node, 0);
+			return t;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public void traverse() {
+		this.top.traverse();
 	}
 	public static void main(String[] args) {
 		Stack<Integer> stack = new Stack<>(new Node<>());
-		System.out.println(stack.isEmpty(stack));
+		stack.pushStack(1);
+		stack.pushStack(2);
+		stack.traverse();
+		System.out.println(stack.pullStack());
+		stack.pullStack();
+		System.out.println(stack.isEmpty());
+		
 	}
 
 }
