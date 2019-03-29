@@ -13,7 +13,7 @@ public class Stack<T>{
 		return this.top.nextNode() == null ? true:false;
 	}
 	public boolean pushStack(T input) {
-		if (this.top.insertNode(this.top, 0, input)) {
+		if (this.top.insertNode(0, input)) {
 			return true;
 		}
 		else {
@@ -24,7 +24,7 @@ public class Stack<T>{
 		Node<T> node = this.top;
 		try {
 			T t = node.nextNode().getData(); 
-			node.deleteNode(node, 0);
+			node.deleteNode(0);
 			return t;
 		} catch (Exception e) {
 			e.printStackTrace();

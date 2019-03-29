@@ -1,18 +1,18 @@
 package byr.lavaluv;
 
 public class Queue<T> {
-	private Node<T> head;
-	private Node<T> tail;
+	private TwoWayNode<T> head;
+	private TwoWayNode<T> tail;
 	public Queue() {
-		this.head = new Node<>();
-		this.tail = new Node<>();
+		this.head = new TwoWayNode<>();
+		this.tail = new TwoWayNode<>();
 	}
 	public boolean isEmpty() {
 		return this.head.nextNode() == null ? true:false;
 	}
 	public boolean inputQueue(T data) {
 		try {
-			Node<T> newNode = new Node<T>(data);
+			TwoWayNode<T> newNode = new TwoWayNode<T>(data);
 			newNode.setNextNode(this.tail.nextNode());
 			this.tail.setNextNode(newNode);
 			if (this.head.nextNode() == null) {

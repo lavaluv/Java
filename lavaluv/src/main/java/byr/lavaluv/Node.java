@@ -34,7 +34,7 @@ public class Node<T> {
 		this.next = node;
 	}
 	//在指定位置插入节点
-	public boolean insertNode(Node<T> head,int i,T data) {
+	public boolean insertNode(int i,T data) {
 		Node<T> node = this;
 		int j = -1;
 		if (node.nextNode() == null && i == 0) {
@@ -56,7 +56,7 @@ public class Node<T> {
 		return false;
 	}
 	//删除指定位置节点
-	public boolean deleteNode(Node<T> head,int i) {
+	public boolean deleteNode(int i) {
 		Node<T> node = this;
 		Node<T> pre;
 		int j = -1;
@@ -84,9 +84,9 @@ public class Node<T> {
 		Node<Integer> head = new Node<Integer>();
 		head.addData(1);
 		head.addData(2);
-		head.insertNode(head,0,3);
+		head.insertNode(0,3);
 		head.traverse();
-		head.deleteNode(head, 0);
+		head.deleteNode(0);
 		head.traverse();
 	}
 }
