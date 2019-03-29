@@ -80,6 +80,15 @@ public class Node<T> {
 			System.out.println(node.getData());
 		}
 	}
+	public int size() {
+		Node<T> node = this;
+		int size = 0;
+		while (node.nextNode() != null) {
+			node = node.nextNode();
+			size++;
+		}
+		return size;
+	}
 	public static void main(String args[])throws Exception {
 		Node<Integer> head = new Node<Integer>();
 		head.addData(1);
@@ -88,5 +97,6 @@ public class Node<T> {
 		head.traverse();
 		head.deleteNode(0);
 		head.traverse();
+		System.out.print(head.size());
 	}
 }

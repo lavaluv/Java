@@ -13,7 +13,11 @@ public class Queue<T> {
 	public boolean inputQueue(T data) {
 		try {
 			TwoWayNode<T> newNode = new TwoWayNode<T>(data);
-			newNode.setNextNode(this.tail.nextNode());
+			TwoWayNode<T> next = this.tail.nextNode();
+			if (next != null) {
+				newNode.setNextNode(next);
+				next.setPreNode(newNode);
+			}
 			this.tail.setNextNode(newNode);
 			if (this.head.nextNode() == null) {
 				this.head.setNextNode(newNode);
@@ -24,10 +28,40 @@ public class Queue<T> {
 			return false;
 		}
 	}
+	public T outputQueue() {
+		try {
+			if (!this.isEmpty()) {
+				T t = this.head.nextNode().getData();
+				if (this.head.size() > 1) {
+					this.head.setNextNode(this.head.nextNode().preNode());
+					this.head.nextNode().setNextNode(null);
+				}
+				else {
+					this.head.setNextNode(null);
+					this.tail.setNextNode(null);
+				}
+				return t;
+			}
+			else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public void traverse() {
+		this.tail.traverse();
+	}
+	public int size() {
+		return this.tail.size();
+	}
 	public static void main(String args[])throws Exception{
 		Queue<Integer> queue = new Queue<>();
 		queue.inputQueue(1);
 		queue.inputQueue(2);
-		System.out.println(queue.isEmpty());
+		System.out.println(queue.outputQueue());
+		queue.outputQueue();
+		queue.traverse();
 	}
 }

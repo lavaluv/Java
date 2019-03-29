@@ -34,6 +34,9 @@ public class Stack<T>{
 	public void traverse() {
 		this.top.traverse();
 	}
+	public int size() {
+		return this.top.size();
+	}
 	public static void main(String[] args) {
 		Stack<Integer> stack = new Stack<>(new Node<>());
 		stack.pushStack(1);
