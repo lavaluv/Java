@@ -89,6 +89,30 @@ public class Node<T> {
 		}
 		return size;
 	}
+	public boolean findData(T data) {
+		Node<T> node = this;
+		while (node.nextNode() != null) {
+			T dataT = node.getData();
+			if (dataT == data) {
+				return true;
+			}
+			node = node.nextNode();
+		}
+		return false;
+	}
+	public T findDataByIndex(int index) {
+		Node<T> node = this;
+		int i = 0;
+		while (node.nextNode() != null) {
+			node = node.nextNode();
+			T dataT = node.getData();
+			if (index == i) {
+				return dataT;
+			}
+			i++;
+		}
+		return null;
+	}
 	public static void main(String args[])throws Exception {
 		Node<Integer> head = new Node<Integer>();
 		head.addData(1);
@@ -97,6 +121,7 @@ public class Node<T> {
 		head.traverse();
 		head.deleteNode(0);
 		head.traverse();
-		System.out.print(head.size());
+		System.out.println(head.size());
+		System.out.println(head.findDataByIndex(0));
 	}
 }
