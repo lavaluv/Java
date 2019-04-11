@@ -4,20 +4,32 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Tree<T> {
-	private T dataT;
+	private ArrayList<T> dataT;
 	private Node<Tree<T>> treeList;
 	public Tree() {
+		this.dataT = new ArrayList<T>();
 		this.treeList = new Node<Tree<T>>();
 	}
 	public Tree(T data) {
-		this.dataT = data;
+		this.dataT = new ArrayList<T>();
+		this.dataT.add(data);
 		this.treeList = new Node<Tree<T>>();
 	}
-	public void setData(T data) {
-		this.dataT = data;
+	public Tree(ArrayList<T> list) {
+		this.dataT = list;
+		this.treeList = new Node<Tree<T>>();
 	}
-	public T getData() {
+	public void addData(T data) {
+		this.dataT.add(data);
+	}
+	public ArrayList<T> getData() {
 		return this.dataT;
+	}
+	public void setTreelist(Node<Tree<T>> node) {
+		this.treeList = node;
+	}
+	public Node<Tree<T>> getTreeList(){
+		return this.treeList;
 	}
 	public boolean addBranch(Tree<T> tree,T data) {
 		try {
@@ -117,6 +129,18 @@ public class Tree<T> {
 		}
 		System.out.print(")");
 	}
+	public int size() {
+		int size = 1;
+		Node<Tree<T>> node = this.treeList.nextNode();
+		while (node != null) {
+			size += node.getData().size();
+			node = node.nextNode();
+		}
+		return size;
+	}
+	public int degree() {
+		return this.treeList.size();
+	}
 	public static void main(String args[])throws Exception{
 		Tree<Integer> teTree = new Tree<>(1);
 		teTree.addBranch(teTree, 2);
@@ -126,7 +150,7 @@ public class Tree<T> {
 		Tree<Integer> newTree = new Tree<Integer>(5);
 		newTree.addBranch(newTree, 6);
 		teTree.addTree(newTree);
-		System.out.println(teTree.getDepth());
+		System.out.println(teTree.degree());
 		teTree.traverseByDepth();
 	}
 }
