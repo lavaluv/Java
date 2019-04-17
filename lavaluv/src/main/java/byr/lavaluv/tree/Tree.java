@@ -1,7 +1,9 @@
-package byr.lavaluv;
+package byr.lavaluv.tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import byr.lavaluv.node.Node;
 
 public class Tree<T> {
 	private ArrayList<T> dataT;
@@ -59,8 +61,7 @@ public class Tree<T> {
 		try {
 			return this.treeList.findDataByIndex(index);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+			throw new IndexOutOfBoundsException("getSubTree out of index");
 		}
 	}
 	public boolean deleteTree(int index) {

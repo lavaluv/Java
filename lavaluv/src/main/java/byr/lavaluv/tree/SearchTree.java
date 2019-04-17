@@ -1,4 +1,4 @@
-package byr.lavaluv;
+package byr.lavaluv.tree;
 
 public class SearchTree extends BinaryTree<Integer> {
 	public SearchTree(int daT) {
@@ -10,7 +10,7 @@ public class SearchTree extends BinaryTree<Integer> {
 			while (tree != null) {
 				if (tree.getData() > daT) {
 					if (tree.getLeftNode() == null) {
-						tree.setLeftNode(daT);
+						tree.addLeftNode(daT);
 						return true;
 					}
 					else {
@@ -19,7 +19,7 @@ public class SearchTree extends BinaryTree<Integer> {
 				}
 				else if (tree.getData() < daT) {
 					if (tree.getRightNode() == null) {
-						tree.setRightNode(daT);
+						tree.addRightNode(daT);
 						return true;
 					}
 					else {

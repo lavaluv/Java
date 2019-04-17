@@ -1,4 +1,4 @@
-package byr.lavaluv;
+package byr.lavaluv.tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,14 +20,20 @@ public class BinaryTree<T>{
 	public BinaryTree<T> getLeftNode(){
 		return this.left;
 	}
-	public void setLeftNode(T daT) {
+	public void addLeftNode(T daT) {
 		this.left = new BinaryTree<T>(daT);
+	}
+	public void setLeftNode(BinaryTree<T> tree) {
+		this.left = tree;
 	}
 	public BinaryTree<T> getRightNode(){
 		return this.right;
 	}
-	public void setRightNode(T daT){
+	public void addRightNode(T daT){
 		this.right = new BinaryTree<T>(daT);
+	}
+	public void setRightNode(BinaryTree<T> tree) {
+		this.right = tree;
 	}
 	@SuppressWarnings("unchecked")
 	public boolean addBranch(T daT) {

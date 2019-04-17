@@ -1,4 +1,4 @@
-package byr.lavaluv;
+package byr.lavaluv.node;
 
 public class Node<T> {
 	private  T data;
