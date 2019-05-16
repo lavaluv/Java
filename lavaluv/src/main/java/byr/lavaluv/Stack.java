@@ -38,7 +38,7 @@ public class Stack<T>{
 		return this.top.size();
 	}
 	public static void main(String[] args) {
-		Stack<Integer> stack = new Stack<>(new Node<>());
+		Stack<Integer> stack = new Stack<Integer>();
 		stack.pushStack(1);
 		stack.pushStack(2);
 		stack.traverse();
