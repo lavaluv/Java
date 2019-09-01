@@ -20,7 +20,12 @@ import java.util.List;
  */
 public class Lists {
 	public static void main(String args[])throws Exception{
+		int i = 4;
+		i |= i >>> 1;
+		i |= i >>> 2;
+		i |= i >>> 3;
 		ArrayList<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(1,2,3));
 		List<Integer> list = Collections.synchronizedList(arrayList);
+		System.out.println(i);
 	}
 }

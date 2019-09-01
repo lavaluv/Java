@@ -1,4 +1,4 @@
-package byr.lavaluv;
+package byr.lavaluv.node;
 
 public class TwoWayNode<T> extends Node<T> {
 	private TwoWayNode<T> preNode;

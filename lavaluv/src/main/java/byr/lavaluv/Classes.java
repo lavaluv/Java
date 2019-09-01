@@ -2,8 +2,8 @@ package byr.lavaluv;
 
 public class Classes {
 	public static void main(String args[])throws Exception {
-//		Test test1 = new Test();
-//		Test test2 = new Test();
+		Test test1 = new Test();
+		Test test2 = new Test();
 		Father father = new Son(4, 5);
 		father.getpri();
 		father.getpro();
@@ -43,12 +43,6 @@ class Father{
 	 * 即子类的成员变量会屏蔽掉父类的同名成员变量。
 	 * 如果要在子类中访问父类中同名成员变量，需要使用super关键字来进行引用
 	 * 
-	 * 1）能够继承父类的public和protected成员方法；不能够继承父类的private成员方法
-	 * 2）对于父类的包访问权限成员方法，如果子类和父类在同一个包下，则子类能够继承；否则，子类不能够继承
-	 * 3）对于子类可以继承的父类成员方法，如果在子类中出现了同名称的成员方法，则称为覆盖，
-	 * 即子类的成员方法会覆盖掉父类的同名成员方法。
-	 * 如果要在子类中访问父类中同名成员方法，需要使用super关键字来进行引用。
-	 * 
 	 * 子类是不能够继承父类的构造器，但是要注意的是，如果父类的构造器都是带有参数的，
 	 * 则必须在子类的构造器中显示地通过super关键字调用父类的构造器并配以适当的参数列表。
 	 * 如果是用在子类构造器中，则必须是子类构造器的第一个语句。
@@ -58,7 +52,9 @@ class Father{
 	private int priData;
 	protected int proData;
 	public int pubData;
-	public Father() {};
+	public Father() {
+		this.pubData = 1;
+	};
 	public Father(int i,int j,int n) {
 		this.priData = i;
 		this.proData = j;
@@ -78,7 +74,7 @@ class Son extends Father{
 	public int pubData;
 	public Son() {};
 	public Son(int j,int n) {
-		//super(0, j, n);显示调用父类构造器
+		//super(0, j, n);//显示调用父类构造器
 		System.out.println("Son Constructor");
 		this.proData = j;
 		this.pubData = n;

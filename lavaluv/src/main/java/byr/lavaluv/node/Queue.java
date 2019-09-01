@@ -1,4 +1,4 @@
-package byr.lavaluv;
+package byr.lavaluv.node;
 
 public class Queue<T> {
 	private TwoWayNode<T> head;

@@ -18,6 +18,7 @@ import java.util.ListIterator;
  * 
  * Set集合的特点是：元素不可重复
  * HashSet集合A:底层数据结构是哈希表(是一个元素为链表的数组)
+ * 散列表为每个对象计算出一个整数，称为散列码。根据这些计算出来的整数(散列码)保存在对应的位置上
  * TreeSet集合A:底层数据结构是红黑树(是一个自平衡的二叉树)B:保证元素的排序方式
  * LinkedHashSet集合A:：底层数据结构由哈希表和链表组成。
  */
@@ -26,7 +27,7 @@ public class Collections
     public static void main( String[] args )
     {
     	//int需要装箱成Integer
-    	ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(1,2,1));
+    	ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(1,2,3));
     	Iterator<Integer> iterator = arrayList.iterator();
     	ListIterator<Integer> listIterator = arrayList.listIterator();
         while (iterator.hasNext()) {

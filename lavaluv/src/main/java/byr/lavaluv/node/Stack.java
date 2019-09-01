@@ -1,8 +1,10 @@
-package byr.lavaluv;
+package byr.lavaluv.node;
 
 public class Stack<T>{
 	private Node<T> top;
-	public Stack() {};
+	public Stack() {
+		top = new Node<T>();
+	};
 	public Stack(Node<T> top) {
 		this.top = top;
 	}
