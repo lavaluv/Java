@@ -12,9 +12,14 @@ import java.util.List;
  * 插入和删除使用System.arraycopy实现
  * 删除元素不减少容量，需要trimToSize函数来减少
  * List<Integer> list = Collections.synchronizedList(arrayList)实现线程同步
+ * 在方法内部加上synchronized
  * 
- * Vector方法都是线程安全，有性能损失
+ * Vector方法都是线程安全，有性能损失，在方法声明时加上synchronized
  * 扩容时为capacity*2，占用内存
+ * 
+ * 以上两种线程安全的方法加锁粒度为”方法“，在遍历等操作是要加上synchronized
+ * 推荐使用CopyOnWriteList,ConcurrentHashMap(cas算法，volatile声明),CopyOnWriteSet替代
+ * CopyOnWrite保证数据的最终一致性，不保证数据实时一致性
  * 
  * 查询多用ArrayList，增删多用LinkedList(极端情况下不绝对)
  */

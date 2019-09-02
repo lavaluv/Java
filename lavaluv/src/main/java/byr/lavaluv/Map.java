@@ -32,6 +32,8 @@ import java.util.concurrent.ConcurrentHashMap;
 	初始容量过大，那么遍历时我们的速度就会受影响~
 	初始容量过小，散列表再散列(扩容的次数)可能就变得多，扩容也是一件非常耗费性能的一件事~
 	从源码上我们可以发现：HashMap并不是直接拿key的哈希值来用的，它会将key的哈希值的高16位进行异或操作，使得我们将元素放入哈希表的时候增加了一定的随机性。
+	
+	如果key值为类，需要同时重写该类的hashCode()方法和它的equals()方法
  * 如果要使用线程安全的HashMap:
  * ConurrentHashMap 或
  * Map m = Collections.synchronizedMap(new HashMap(...));

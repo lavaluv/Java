@@ -16,11 +16,12 @@ import java.util.ListIterator;
  * LinkedList底层数据结构是链表。线程不安全
  * Vector底层数据结构是数组。线程安全
  * 
- * Set集合的特点是：元素不可重复
- * HashSet集合A:底层数据结构是哈希表(是一个元素为链表的数组)
+ * Set集合的特点是：元素不可重复，不保证遍历顺序，初始容量影响遍历性能
+ * HashSet集合A:底层数据结构是哈希表(是一个元素为链表的数组)以HashMap实现,以key存储值，value为Object
  * 散列表为每个对象计算出一个整数，称为散列码。根据这些计算出来的整数(散列码)保存在对应的位置上
- * TreeSet集合A:底层数据结构是红黑树(是一个自平衡的二叉树)B:保证元素的排序方式
- * LinkedHashSet集合A:：底层数据结构由哈希表和链表组成。
+ * TreeSet集合A:底层数据结构是红黑树(是一个自平衡的二叉树)，以TreeMap实现
+ * B:保证元素的排序方式
+ * LinkedHashSet集合A:：底层数据结构由哈希表和双向链表组成，以LinkedHashMap实现
  */
 public class Collections 
 {
