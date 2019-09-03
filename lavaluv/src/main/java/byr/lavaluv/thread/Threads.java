@@ -38,6 +38,7 @@ public class Threads {
 		TestThread testThread2 = new TestThread(200);
 		TestRun testRun = new TestRun(200);
 		Thread thread = new Thread(testRun,"thred0");
+		Runnable runnable = () -> task(200);
 		
 		testThread.setName("thread1");
 		testThread2.setName("thread2");
@@ -45,6 +46,7 @@ public class Threads {
 		testThread.start();
 		testThread2.start();
 		thread.start();
+		new Thread(runnable).start();
 	}
 	static class TestThread extends Thread {
 		private int i;
@@ -66,6 +68,11 @@ public class Threads {
 			for (int i = 0; i < this.i; i++) {
 				System.out.println(Thread.currentThread().getName());
 			}
+		}
+	}
+	static public void task(int k) {
+		for (int i = 0; i < k; i++) {
+			System.out.println(Thread.currentThread().getName());
 		}
 	}
 }

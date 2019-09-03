@@ -1,6 +1,7 @@
 package byr.lavaluv.thread;
 /*
  * java有两种锁，synchronized和lock
+ * 都为非公平锁，请求可以插队获取锁
  * 
  * synchronized特性为：
  * 将修饰的代码块（方法）加锁，保证原子性和可见性
