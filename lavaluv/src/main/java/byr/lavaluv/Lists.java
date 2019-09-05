@@ -3,7 +3,11 @@ package byr.lavaluv;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+
+import byr.lavaluv.Map.Student;
 
 /**
  * 
@@ -32,5 +36,22 @@ public class Lists {
 		ArrayList<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(1,2,3));
 		List<Integer> list = Collections.synchronizedList(arrayList);
 		System.out.println(i);
+		ArrayList<Student> list2 = new ArrayList<Map.Student>();
+		list2.add(new Student("hbq", 24));
+		list2.add(new Student("ex", 20));
+		for(Student student:list2) {
+			System.out.println(student.getName()+student.getAge());
+		}
+		Collections.sort(list2, new Comparator<Student>() {
+			@Override
+			public int compare(Student o1, Student o2) {
+				int i;
+				i = o1.getAge() - o2.getAge();
+				return i == 0?o1.getName().compareTo(o2.getName()):i;
+			}
+		});
+		for(Student student:list2) {
+			System.out.println(student.getName()+student.getAge());
+		}
 	}
 }
