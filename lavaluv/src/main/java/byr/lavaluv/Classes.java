@@ -1,17 +1,28 @@
 package byr.lavaluv;
-
+/*
+ * 1． 父类静态成员和静态初始化块 ，按在代码中出现的顺序依次执行
+2． 子类静态成员和静态初始化块 ，按在代码中出现的顺序依次执行
+3． 父类实例成员和实例初始化块 ，按在代码中出现的顺序依次执行
+4． 父类构造方法
+5． 子类实例成员和实例初始化块 ，按在代码中出现的顺序依次执行
+6． 子类构造方法
+ */
 public class Classes {
-	public static void main(String args[])throws Exception {
-		Test test1 = new Test();
-		Test test2 = new Test();
-		Father father = new Son(4, 5);
-		father.getpri();
-		father.getpro();
-		father.getpub();
-		Son son = new Son(4,5);
-		son.getpro();
-		son.getpub();//0
-	}
+//	public static void main(String args[])throws Exception {
+//		Test test1 = new Test();
+//		Test test2 = new Test();
+//		Father father = new Son(4, 5);
+//		father.getpri();
+//		father.getpro();
+//		father.getpub();
+//		Son son = new Son(4,5);
+//		son.getpro();
+//		son.getpub();//0
+//	}
+    public static void main(String[] args) {
+    	new Son();
+        new Dervied();
+    }
 }
 class Test{
 	/**
@@ -54,8 +65,10 @@ class Father{
 	public int pubData;
 	public Father() {
 		this.pubData = 1;
+		System.out.println("father Constructor1");
 	};
 	public Father(int i,int j,int n) {
+		System.out.println("father Constructor2");
 		this.priData = i;
 		this.proData = j;
 		this.pubData = n;
@@ -79,4 +92,42 @@ class Son extends Father{
 		this.proData = j;
 		this.pubData = n;
 	}
+}
+class Dervied extends Base {
+
+
+    private String name = "Java3y";
+
+    public Dervied() {
+    	System.out.println("Dervied");
+        tellName();
+        printName();
+    }
+
+    public void tellName() {
+        System.out.println("Dervied tell name: " + name);
+    }
+
+    public void printName() {
+        System.out.println("Dervied print name: " + name);
+    }
+}
+
+class Base {
+
+    private String name = "公众号";
+
+    public Base() {
+    	System.out.println("Base");
+        tellName();
+        printName();
+    }
+
+    public void tellName() {
+        System.out.println("Base tell name: " + name);
+    }
+
+    public void printName() {
+        System.out.println("Base print name: " + name);
+    }
 }

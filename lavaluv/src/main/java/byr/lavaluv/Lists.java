@@ -26,6 +26,7 @@ import byr.lavaluv.Map.Student;
  * CopyOnWrite保证数据的最终一致性，不保证数据实时一致性
  * 
  * 查询多用ArrayList，增删多用LinkedList(极端情况下不绝对)
+ * Collections.sort()调用Arrays.sort(),Arrays.sort底层为归并排序
  */
 public class Lists {
 	public static void main(String args[])throws Exception{

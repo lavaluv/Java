@@ -41,6 +41,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * LinkedHashMap:
  * 底层为散列表和双向链表
  * 遍历复杂度与初始容量无关，遍历的是内部双向链表
+ * 遍历顺序和输入顺序相同
  * 
  * TreeMap:
  * 底层为红黑树
@@ -49,6 +50,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Map {
 	public static void main(String[] args)throws Exception{
+		
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 		map.put(1, 123);
 		map.put(2, 123);

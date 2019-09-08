@@ -44,6 +44,12 @@ import java.util.ArrayList;
 　　③、类类型：对类类型的 instanceof 则是遍历S的super链（继承链）一直到Object，看有没有跟T一致的。遍历类的super链意味着这个算法的性能会受类的继承深度的影响。
  * getClass():只能判断两个类是否严格相等(==)
  * 
+ * 四种引用类型：
+ * 强引用：大部分常用的对象为强引用
+ * 软引用：非必须的对象，SoftRefference对象为软引用，当内存不足时会被回收
+ * 弱引用：比软引用生命周期更短，WeakRefference对象，当执行GC回收时会被回收
+ * 虚引用：只用于跟踪GC对象，PhantomRefference对象，必须和RefferenceQueue联合使用
+ * 第一是可以让程序员通过代码的方式决定某些对象的生命周期；第二是有利于JVM进行垃圾回收。
  * 
  */
 public class Objects {

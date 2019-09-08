@@ -1,15 +1,23 @@
 package byr.lavaluv.IO;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.CharArrayReader;
+import java.io.CharArrayWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
@@ -55,6 +63,16 @@ import org.junit.jupiter.api.Test;
  * OutputStreamWriter	是字符流通向字节流的桥梁
  * FileWriter	用于对文件进行写入操作。	
  * PrintWriter	为文本输出流提供打印功能。
+ * 
+ * Reader与InputStream的不同：
+ * 操作对象的不同。字节流操作字节、字符操作字符。
+ * 实现的接口不同。Reader比InputStream多实现了一个Readable接口，用于提供一个可以将字符写入到指定缓存数组的方法。
+ * close方法不同。Reader的close方法是抽象的、子类必须重写。 InputStream的close方法则不是抽象的。
+ * 
+ * Writer与OutputStream区别
+ * 操作对象的不同。字节流操作字节、字符操作字符。
+ * 实现的接口不同。Writer相比与OutputStream多实现了一个Appendable接口、用于提供几个向此流中追加字符的方法。
+ * close、flush方法不同。Writer的close、flush方法都是抽象的，而OutputStream则不是。
  * 
  * https://blog.csdn.net/panweiwei1994/article/details/78046000
  */
@@ -490,4 +508,239 @@ public class IOs {
 	        }
 	    }
 	}
+	/*
+	 * CharArrayReader实现一个可用作字符输入流的字符缓冲区。
+	 * 在做所有操作前，都要确认流处于open状态(ready())。判断流处于open状态的依据是buf不为null。close方法中会将buf置为null。
+	 * CharArrayReader支持mark()操作。
+	 */
+	static public class CharArrayReaderTest {
+
+	    /**
+	     * CharArrayReader的API测试函数
+	     */
+	    @Test
+	    public void tesCharArrayReader() {
+	        try {
+	            CharArrayReader reader = new CharArrayReader(
+	                    new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' });
+
+	            // 从reader中连续读取三个字节
+	            for (int i = 0; i < 3; i++) {
+	                if (reader.ready() == true) {
+	                    char tmp = (char) reader.read();
+	                    System.out.print(tmp);
+	                }
+	            }
+	            System.out.println();
+
+	            // 测试是否支持mark
+	            if (!reader.markSupported()) {
+	                System.out.println("make not supported!");
+	                return;
+	            } else
+	                System.out.println("make supported!");
+
+	            // 标记，当前位置为d
+	            reader.mark(0);
+
+	            // 跳过2个字符，当前位置为f
+	            reader.skip(2);
+
+	            // 向下读取两个字符，fg
+	            char[] buf = new char[2];
+	            reader.read(buf, 0, 2);
+	            System.out.println("buf:" + String.valueOf(buf));
+
+	            // 重置当前位置为上一次标记的位置，即为d
+	            reader.reset();
+
+	            // 向下读取两个字符，de
+	            reader.read(buf, 0, 2);
+	            System.out.println("buf:" + String.valueOf(buf));
+
+	            // 关闭后，在调用方法，会抛出“java.io.IOException: Stream closed”异常
+	            reader.close();
+	            reader.read();
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	/*
+	 * CharArrayWriter实现一个可用作字符输出流的字符缓冲区。
+	 * CharArrayWriter的缓冲区会随向流中写入数据而自动增长。
+	 * 可使用CharArrayWritert的oCharArray()和 toString()获取缓冲区中数据。
+	 * CharArrayWriter中close()方法无效。
+	 */
+	public static class CharArrayWriterTest {
+
+	    private static final char[] charArr = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g'};
+
+	    /**
+	     * CharArrayWriter的API测试函数
+	     */
+	    @Test
+	    public void testCharArrayWriter() {
+	        try {
+	            // 创建CharArrayWriter字符流,默认大小为32
+	            CharArrayWriter writer = new CharArrayWriter();
+
+	            writer.write('A');
+	            writer.write("BCDEF");
+	            writer.write(charArr, 1, 3);
+	            System.out.println("写入字符A，写入字符串BCDEF，写入charArr中从索引位置1开始的三个字符，即bcd，此时的writer为：\n" + writer);
+
+	            writer.append('0').append("12345").append(String.valueOf(charArr), 3, 6);
+	            System.out.println("写入字符0，写入字符串12345，写入charArr中从索引位置3到5的三个字符，即def，此时的writer为：\n" + writer);
+
+	            System.out.println("此时writer的大小为：\n" + writer.size());
+
+	            char[] buf = writer.toCharArray();
+	            System.out.println("将writer转化为字符数组再将其打印：\n" + String.valueOf(buf));
+
+	            // 创建CharArrayWriter字符流,指定大小为100
+	            CharArrayWriter writer2 = new CharArrayWriter(100);
+	            writer.writeTo(writer2);
+	            System.out.println("将writer缓冲区内容写入到wirter2中，writer缓冲区内容为：\n" + writer2);
+
+	            writer.reset();
+	            System.out.println("将writer重置，此时其缓冲区为:\n" + writer);
+
+	            writer2.close();
+	            System.out.println("将writer2关闭，调用其size方法，结果为:\n" + writer2.size());
+	            System.out.println("如果没有抛出异常，说明其close方法没有作用。");
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	/*
+	 * BufferedReader，字符缓冲输入流，作用是为其他输入流提供缓冲功能。BufferedReader从其他字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。
+	 * BufferedReader支持标记功能。
+	 * BufferedWriter，字符缓冲输出流，作用是为其他输出流提供缓冲功能。BufferedWriter将文本写入其他字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。
+	 */
+	public static class BufferedReaderTest {
+
+	    @Test
+	    public void test() {
+	        try {
+	            File file = new File("src/BufferedReader.txt");
+	            BufferedReader in = new BufferedReader(new FileReader(file));
+
+	            System.out.println("从缓冲区中读取5个字符，并打印");
+	            for (int i = 0; i < 5; i++) {
+	                if (in.ready()) {
+	                    int tmp = in.read();
+	                    System.out.println(i + ":" + (char) tmp);
+	                }
+	            }
+
+	            char[] buf = new char[3];
+	            in.read(buf, 0, 3);
+	            System.out.println("从缓冲区中读取三个字符存到字符数组中，字符数组内容为" + String.valueOf(buf));
+	            System.out.println("当前行剩余字符为" + in.readLine());
+
+	            System.out.println("测试BufferedReader是否支持标记");
+	            if (!in.markSupported()) {
+	                System.out.println("make not supported!");
+	                in.close();
+	                return;
+	            }
+	            System.out.println("make supported!");
+
+	            System.out.println("测试标记功能（当前位置的下个字符为A）");
+	            in.mark(1024);
+	            System.out.println("跳过22个字符");
+	            in.skip(21);
+	            System.out.println("当前位置为" + (char) in.read());
+	            System.out.println("重置输入流的索引为mark()所标记的位置，即重置到f处");
+	            in.reset();
+	            System.out.println("当前位置为" + (char) in.read());
+
+	            in.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	public static class BufferedWriterTest {
+
+	    @Test
+	    public void test() {
+
+	        try {
+	            File file = new File("src/BufferedWriter.txt");
+	            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+	            writer.write(new char[] { 'a', 'b', 'c', 'd', 'e' }, 0, 3);
+	            writer.newLine();
+	            writer.write("ABCDEFGHIJKLMN", 0, 3);
+	            writer.newLine();
+	            writer.write('\n');
+	            writer.write(1200);
+
+	            writer.flush();
+
+	            writer.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	/*
+	 * InputStreamReader，字节流通向字符流的桥梁：它使用指定的charset读取字节并将其解码为字符。
+	 * 每次调用InputStreamReader中的read方法都会导致从底层输入流读取一个或多个字节，然后调用编码转换器将字节转化为字符。为避免频繁调用转换器，实现从字节到字符的高效转换，可以提前从底层流读取更多的字节。为了达到最高效率，可要考虑在BufferedReader内包装InputStreamReader。
+	 * InputStreamReader的功能是依赖于StreamDecoder完成的。
+	 * OutputtreamWriter，字符流通向字节流的桥梁：它使用指定的charset将要写入流中的字符编码成字节。
+	 * 每次调用write()方法都会导致在给定字符（或字符集）上调用编码转换器。为避免频繁调用转换器，在写入底层输出流之前，可以将得到的这些字节积累在缓冲区。例如，可考虑将OutputStreamWriter包装到BufferedWriter中。
+	 */
+	public static class OutputStreamWriterTest {
+
+	    @Test
+	    public void test() {
+	        try {
+	            File file = new File("src/inputStreamReader.txt");
+	            //等价于FileWriter outFileWriter = new FileWriter(file);
+	            OutputStreamWriter out1 = new OutputStreamWriter(new FileOutputStream(file));
+	            out1.write("潘威威的博客");
+
+	            out1.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	public static class InputStreamReaderTest {
+
+	    /**
+	     * inputStreamReader.txt中的内容为“潘威威的博客”
+	     */
+	    @Test
+	    public void test() {
+	        try {
+	            File file = new File("src/inputStreamReader.txt");
+	            //等价于FileReader fileReader = new FileReader(file);
+	            InputStreamReader reader = new InputStreamReader(new FileInputStream(file),"utf-8");
+
+	            System.out.println("ready():"+reader.ready());
+
+	            System.out.println("getEncoding():"+reader.getEncoding());
+
+	            System.out.println("read():"+(char)reader.read());
+
+	            char[] buf = new char[40];
+	            reader.read(buf, 0, buf.length);
+	            System.out.println("read(char[], int, int)："+(new String(buf)));
+
+	            reader.close();
+	        } catch(IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	/*
+	 * 
+	 */
 }
