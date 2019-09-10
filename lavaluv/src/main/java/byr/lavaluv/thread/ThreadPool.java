@@ -46,6 +46,14 @@ import java.util.concurrent.Future;
  * 010 TIDYING：执行任务的数量为零时，由000和001转为010
  * 011 TERMINATED：线程池终止状态
  * 
+ * ThreadPoolExecutor(int corePoolSize,
+                      int maximumPoolSize,
+                      long keepAliveTime,
+                      TimeUnit unit,
+                      BlockingQueue<Runnable> workQueue,
+                      ThreadFactory threadFactory,
+                      RejectedExecutionHandler handler)
+ *
  * 三种线程池实现：
  * newFixedThreadPool core==max的固定大小线程池
  * newCachedThreadPool 弹性线程池，请求没有空闲线程时，创建新线程

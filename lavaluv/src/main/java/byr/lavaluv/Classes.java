@@ -6,6 +6,7 @@ package byr.lavaluv;
 4． 父类构造方法
 5． 子类实例成员和实例初始化块 ，按在代码中出现的顺序依次执行
 6． 子类构造方法
+7.  内部类被调用时才进行初始化
  */
 public class Classes {
 //	public static void main(String args[])throws Exception {

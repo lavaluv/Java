@@ -1,4 +1,4 @@
-package byr.lavaluv;
+package byr.lavaluv.Design;
 
 import org.junit.jupiter.api.Test;
 /*

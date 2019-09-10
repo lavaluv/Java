@@ -37,7 +37,7 @@ public class Genericity {
 		ArrayList<? extends Father> list;
 		ArrayList<? super Son> list2;
 		list = new ArrayList<Father>();
-		//list = new ArrayList<son>();//error
+		list = new ArrayList<Son>();
 		list2 = new ArrayList<Son>();
 		//list.add(new Father());//error
 		list2.add(new Son());
