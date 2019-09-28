@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
  *  注解处理
  *  语义分析和生成class文件
  *  
+ *  词法分析 语法分析 语义分析 中间代码生成 中间代码优化 目标代码生成
+ *  
  *  .class 文件不能直接运行，需要借助JVM,JVM运行在操作系统上，JDK区分不同操作系统
  *  一次编译，到处运行
  *  
@@ -111,6 +113,10 @@ public class JVM {
 		s3.intern();//常量池没有，返回现在“11”的引用
 		String s4 = "11";//指向String("11")
 		System.out.println(s3==s4);
+		
+		String string = "ok";
+		String newsString = new String("ok");
+		System.out.println(string == newsString);
 		//内存泄漏
 		HashSet<Object> set = new HashSet<Object>();
 		Object object = new Object();

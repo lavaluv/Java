@@ -48,7 +48,7 @@ public class Threads {
 		thread.start();
 		new Thread(runnable).start();
 	}
-	static class TestThread extends Thread {
+	static class TestThread extends Thread{
 		private int i;
 		public TestThread(int i) {
 			this.i = i;

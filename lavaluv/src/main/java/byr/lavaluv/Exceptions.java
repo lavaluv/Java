@@ -116,9 +116,21 @@ public class Exceptions {
         } finally {  
             System.out.println("testEx2, finally; return value=" + ret);  
             //finally不应返回值，会使上一个函数无法捕获错误
+            ret = true;
             return ret;  
         }  
     }  
+    static public int test() {
+    	int i = 0;
+    	try {
+			i++;
+			return i;
+		} finally {
+			i = -1;
+			//会覆盖try里的return
+			return i;
+		}
+    }
   
     public static void main(String[] args) {  
         Exceptions testException1 = new Exceptions();  
@@ -127,5 +139,6 @@ public class Exceptions {
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
+        System.out.println(test());
     }
 }

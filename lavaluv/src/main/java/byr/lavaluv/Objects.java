@@ -53,6 +53,9 @@ import java.util.ArrayList;
  * 
  */
 public class Objects {
+	static public void out() {
+		System.out.println("out");
+	}
 	public static void main(String[] args)throws Exception{
 		String a = "";
 		String b = "";
@@ -69,6 +72,8 @@ public class Objects {
 		System.out.println(test.clone() == test);
 		System.out.println(test.clone().getClass() == test.getClass());
 		System.out.println(test.clone().equals(test));
+		((Objects)null).out();
+		Objects.out();
 	}
 	static class Test implements Cloneable{
 		private ArrayList<String> list = new ArrayList<String>();

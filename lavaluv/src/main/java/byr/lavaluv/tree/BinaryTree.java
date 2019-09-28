@@ -11,6 +11,16 @@ public class BinaryTree<T>{
 	public BinaryTree(T daT) {
 		this.dataT = daT;
 	}
+	public BinaryTree(T[] in) {
+		for (int i = 0; i < in.length; i++) {
+			if (i == 0) {
+				this.dataT = in[i];
+			}
+			else {
+				addBranch(in[i]);
+			}
+		}
+	}
 	public T getData() {
 		return this.dataT;
 	}
@@ -76,6 +86,7 @@ public class BinaryTree<T>{
 			return false;
 		}
 	}
+	//先序
 	public void traverseByDepth() {
 		BinaryTree<T> tree = this;
 		System.out.print("("+tree.dataT);
@@ -86,6 +97,53 @@ public class BinaryTree<T>{
 			tree.right.traverseByDepth();
 		}
 		System.out.print(")");
+	}
+	//中序
+		public void traverseByDepthMiddle() {
+			BinaryTree<T> tree = this;
+			System.out.print("(");
+			if (tree.left != null) {
+				tree.left.traverseByDepthMiddle();
+			}
+			System.out.print(tree.dataT);
+			if(tree.right != null){
+				tree.right.traverseByDepthMiddle();
+			}
+			System.out.print(")");
+		}
+	//后序
+	public void traverseByDepthBack() {
+		BinaryTree<T> tree = this;
+		System.out.print("(");
+		if (tree.left != null) {
+			tree.left.traverseByDepthBack();
+		}
+		if(tree.right != null){
+			tree.right.traverseByDepthBack();
+		}
+		System.out.print(tree.dataT);
+		System.out.print(")");
+	}
+	public void traverseByLevel() {
+		BinaryTree<T> binaryTree = this;
+		ArrayList<BinaryTree<T>> list = new ArrayList<BinaryTree<T>>();
+		ArrayList<BinaryTree<T>> temp = new ArrayList<BinaryTree<T>>();
+		list.add(binaryTree);
+		while (!list.isEmpty()) {
+			for (BinaryTree<T> binaryTree2 : list) {
+				System.out.print(binaryTree2.dataT);
+				if (binaryTree2.left != null) {
+					temp.add(binaryTree2.left);
+				}
+				if (binaryTree2.right != null) {
+					temp.add(binaryTree2.right);
+				}
+			}
+			System.out.println();
+			list.clear();
+			list.addAll(temp);
+			temp.clear();
+		}
 	}
 	public int size() {
 		int size = 1;
@@ -106,6 +164,6 @@ public class BinaryTree<T>{
 		binaryTree.addBranch(2);
 		binaryTree.addBranch(3);
 		binaryTree.addBranch(4);
-		binaryTree.traverseByDepth();
+		binaryTree.traverseByDepthMiddle();
 	}
 }

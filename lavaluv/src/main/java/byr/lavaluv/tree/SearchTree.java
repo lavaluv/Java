@@ -5,6 +5,12 @@ public class SearchTree extends BinaryTree<Integer> {
 	public SearchTree(int daT) {
 		super(daT);
 	}
+	public SearchTree(int[] arr) {
+		super(arr[0]);
+		for (int i = 1; i < arr.length; i++) {
+			addBranch(arr[i]);
+		}
+	}
 	public boolean addBranch(int daT) {
 		try {
 			BinaryTree<Integer> tree = this;
@@ -34,12 +40,27 @@ public class SearchTree extends BinaryTree<Integer> {
 			return false;
 		}
 	}
+	public boolean search(int v) {
+		BinaryTree<Integer> binaryTree = this;
+		while (binaryTree!= null) {
+			if (binaryTree.getData() == v) {
+				return true;
+			}
+			else if (binaryTree.getData() > v) {
+				binaryTree = binaryTree.getRightNode();
+			}
+			else if (binaryTree.getData() < v) {
+				binaryTree = binaryTree.getLeftNode();
+			}
+		}
+		return false;
+	}
 	public static void main(String args[])throws Exception{
 		SearchTree searchTree = new SearchTree(5);
 		searchTree.addBranch(3);
 		searchTree.addBranch(7);
 		searchTree.addBranch(4);
-		searchTree.traverseByDepth();
+		searchTree.traverseByDepthMiddle();
 		System.out.println(searchTree.degree());
 	}
 }

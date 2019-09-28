@@ -7,6 +7,9 @@ package byr.lavaluv;
 5． 子类实例成员和实例初始化块 ，按在代码中出现的顺序依次执行
 6． 子类构造方法
 7.  内部类被调用时才进行初始化
+
+	 j = i++;
+	 先赋值给j，i再加1
  */
 public class Classes {
 //	public static void main(String args[])throws Exception {
@@ -83,6 +86,9 @@ class Father{
 	public void getpub() {
 		System.out.println(this.pubData);
 	}
+	protected int protectM(int i) {
+		return 0;
+	}
 }
 class Son extends Father{
 	public int pubData;
@@ -92,6 +98,12 @@ class Son extends Father{
 		System.out.println("Son Constructor");
 		this.proData = j;
 		this.pubData = n;
+	}
+	public int Son(int i) {
+		return 0;
+	}
+	protected int protectM(int i) {
+		return 0;
 	}
 }
 class Dervied extends Base {
