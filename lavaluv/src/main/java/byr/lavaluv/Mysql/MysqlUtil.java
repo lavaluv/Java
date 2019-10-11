@@ -16,7 +16,6 @@ public class MysqlUtil {
 			connection = DriverManager.getConnection(path,user,password);
 			statement = connection.createStatement();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();

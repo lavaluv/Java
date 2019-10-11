@@ -32,10 +32,28 @@ public class Tests {
 	@Test
 	public void main() throws IOException {
 		int [] in = {};
-		int [] ins = {1,3,4,5,6};
+		int [] ins = {1,1,-1,-1,3};
 		String s = "-";
-		System.out.println(isPalindrome(-1));
+		System.out.println(threeSumClosest(ins, -1));
 	}
+    public int threeSumClosest(int[] nums, int target) {
+        int sum = 0;
+        int out = Integer.MAX_VALUE-Math.abs(target);
+        for (int i = 0; i < nums.length-2; i++) {
+        	sum+= nums[i];
+        	for (int j = i+1; j < nums.length-1; j++) {
+				sum+=nums[j];
+				for (int j2 = j+1; j2 < nums.length; j2++) {
+					sum+=nums[j2];
+					out = Math.abs(out - target) > Math.abs(sum -target)?sum:out;
+					sum-=nums[j2];
+				}
+				sum-=nums[j];
+			}
+        	sum-=nums[i];
+		}
+        return out;
+    }
     public boolean isPalindrome(int x) {
         if (x < 0) {
 			return false;

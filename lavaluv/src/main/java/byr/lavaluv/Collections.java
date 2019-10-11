@@ -3,6 +3,7 @@ package byr.lavaluv;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.ListIterator;
 
 /**
@@ -13,7 +14,7 @@ import java.util.ListIterator;
  * List集合的特点就是：有序(存储顺序和取出顺序一致),可重复
  * ListIterator可以往前遍历，添加元素，设置元素
  * ArrayList 底层数据结构是数组。线程不安全
- * LinkedList底层数据结构是链表。线程不安全
+ * LinkedList底层数据结构是双向链表。线程不安全
  * Vector底层数据结构是数组。线程安全
  * 
  * Set集合的特点是：元素不可重复，不保证遍历顺序，初始容量影响遍历性能

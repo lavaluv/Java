@@ -7,8 +7,8 @@ package byr.lavaluv;
  *（2）stringBuffer
 　　    1，一个类似于 String 的字符串缓冲区，对它的修改的不会像String那样重创建对象。 
 　　    2，使用append()方法修改Stringbuffer的值，使用toString()方法转换为字符串。 
- *（3）stringBuild
-       是jdk1.5后用来替换stringBuffer的一个类，大多数时候可以替换StringBuffer。和StringBuffer的区别在于Stringbuild是一个单线程使用的类，不值执行线程同步所以比              
+ *（3）stringBuilder
+       是jdk1.5后用来替换stringBuffer的一个类，大多数时候可以替换StringBuffer。和StringBuffer的区别在于Stringbuilder是一个单线程使用的类，不值执行线程同步所以比              
        StringBuffer的速度快，效率高。是线程非安全的。
  */
 
