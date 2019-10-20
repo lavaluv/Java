@@ -26,7 +26,7 @@ import java.util.Collections;
  * 就现在来说，我们可以把它们看成遍历数据集的高级迭代器。此外，流还可以透明地并行处理，也就是说我们不用写多线程代码了。
  */
 public class Java8 {
-	public interface newInterface{
+	public interface javaInterface{
 		public default void test() {
 			System.out.println("new default");
 		}

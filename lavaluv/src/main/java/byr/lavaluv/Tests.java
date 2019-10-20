@@ -32,9 +32,313 @@ public class Tests {
 	@Test
 	public void main() throws IOException {
 		int [] in = {};
-		int [] ins = {1,1,-1,-1,3};
-		String s = "-";
-		System.out.println(threeSumClosest(ins, -1));
+		int [] ins = {1,8,6,2,5,4,8,3,7};
+		System.out.println(intToRoman(3890));
+	}
+	 public class ListNode {
+		     int val;
+		     ListNode next;
+		     ListNode(int x) { val = x; }
+		 }
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+    	ListNode out = head;
+    	ListNode temp = head;
+    	ListNode pre = null;
+    	int index = 1;
+        while (temp!=null) {
+			if(index > n){
+				pre = head;
+				head = head.next;
+			}
+			temp = temp.next;
+			index++;
+		}
+        if (pre == null) {
+			out = out.next;
+		}
+        else {
+			pre.next = head.next;
+		}
+        return out;
+    }
+	TreeSet<String> phone = new TreeSet<String>();
+    public List<String> letterCombinations(String digits) {
+        phone(digits,0,new StringBuilder());
+        List<String> out = new ArrayList<String>();
+        out.addAll(phone);
+        return out;
+    }
+    public void phone(String in,int index,StringBuilder builder) {
+    	if (index == in.length()) {
+    		if(builder.length()!=0)
+			phone.add(builder.toString());
+		}
+    	else {
+			switch (in.charAt(index)) {
+			case '2':
+				builder.append("a");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("b");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("c");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			case '3':
+				builder.append("d");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("e");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("f");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			case '4':
+				builder.append("g");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("h");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("i");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			case '5':
+				builder.append("j");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("k");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("l");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			case '6':
+				builder.append("m");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("n");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("o");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			case '7':
+				builder.append("p");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("q");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("r");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("s");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			case '8':
+				builder.append("t");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("u");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("v");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			case '9':
+				builder.append("w");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("x");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("y");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				builder.append("z");
+				phone(in,index+1,builder);
+				builder.deleteCharAt(builder.length()-1);
+				break;
+			default:
+				break;
+			}
+		}
+    }
+    public String longestCommonPrefix(String[] strs) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0;; i++) {
+        	char temp;
+        	try {
+				temp = strs[0].charAt(i);
+			} catch (Exception e) {
+				return builder.toString();
+			}
+			for (String string : strs) {
+				try {
+					if (string.charAt(i) != temp) {
+						return builder.toString();
+					}
+				} catch (Exception e) {
+					return builder.toString();
+				}
+			}
+			builder.append(temp);
+		}
+    }
+    public int romanToInt(String s) {
+        int out = 0;
+        String[] strings = s.split("");
+        for (int i = 0; i < strings.length; i++) {
+			switch (strings[i]) {
+			case "M":
+				out+=1000;
+				break;
+			case "D":
+				out+=500;
+				break;
+			case "C":
+				if (i+1!=strings.length) {
+					if (strings[i+1].equals("D")) {
+						out+=400;
+						i++;
+					}
+					else if(strings[i+1].equals("M")){
+						out+=900;
+						i++;
+					}
+					else {
+						out+=100;
+					}
+				}
+				else {
+					out+=100;
+				}
+				break;
+			case "L":
+				out+=50;
+				break;
+			case "X":
+				if (i+1!=strings.length) {
+					if (strings[i+1].equals("L")) {
+						out+=40;
+						i++;
+					}
+					else if(strings[i+1].equals("C")){
+						out+=90;
+						i++;
+					}
+					else {
+						out+=10;
+					}
+				}
+				else {
+					out+=10;
+				}
+				break;
+			case "V":
+				out+=5;
+				break;
+			case "I":
+				if (i+1!=strings.length) {
+					if (strings[i+1].equals("V")) {
+						out+=4;
+						i++;
+					}
+					else if(strings[i+1].equals("X")){
+						out+=9;
+						i++;
+					}
+					else {
+						out+=1;
+					}
+				}
+				else {
+					out+=1;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+        return out;
+    }
+    public String intToRoman(int num) {
+        StringBuilder builder = new StringBuilder();
+        while(num > 0) {
+        	if (num >= 1000) {
+				builder.append("M");
+				num-=1000;
+			}
+        	else if (num >=900) {
+				builder.append("CM");
+				num-=900;
+			}
+        	else if (num >= 500) {
+				builder.append("D");
+				num-=500;
+			}
+        	else if (num>=400) {
+				builder.append("CD");
+				num-=400;
+			}
+        	else if (num>=100) {
+				builder.append("C");
+				num-=100;
+			}
+        	else if (num>=90) {
+				builder.append("XC");
+				num-=90;
+			}
+        	else if (num>=50) {
+				builder.append("L");
+				num-=50;
+			}
+        	else if (num>=40) {
+				builder.append("XL");
+				num-=40;
+			}
+        	else if (num>=10) {
+				builder.append("X");
+				num-=10;
+			}
+        	else if (num>=9) {
+				builder.append("IX");
+				num-=9;
+			}
+        	else if (num>=5) {
+				builder.append("V");
+				num-=5;
+			}
+        	else if (num>=4) {
+				builder.append("IV");
+				num-=4;
+			}
+        	else if (num>=1) {
+				builder.append("I");
+				num-=1;
+			}
+        }
+        return builder.toString();
+    }
+	public int maxWater(int[] in) {
+		int max = 0;
+		for (int i = 0; i < in.length - 1; i++) {
+			for (int j = i; j < in.length; j++) {
+				int c = Math.min(in[i], in[j]) * (j-i);
+				max = max < c?c:max;
+			}
+		}
+		return max;
 	}
     public int threeSumClosest(int[] nums, int target) {
         int sum = 0;
